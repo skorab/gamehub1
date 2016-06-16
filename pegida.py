@@ -5,24 +5,15 @@ festerling_image_filename = "festerling.png"
 tonnenanwalt_image_filename = "tonnenanwalt.png"
 
 
-import pygame 
+import pygame
+from math import *
 from pygame.locals import *
 from sys import exit
-from gameobjects.vector2 import Vector2
 pygame.init()
 import numpy
 
 screen = pygame.display.set_mode((1024, 888), 0, 32)
 pygame.display.set_caption("Scheiss Pegida")
-
-clock = pygame.time.Clock()
-
-speed = 20.
-position = numpy.array((30.0,50.0))
-magnitude = [509., 141., 128., 409., 293., 330., 251., 532.]
-heading = numpy.array([(0.7,0.73),(0.71,0.71),(0.78,0.63),(-0.52,0.65),(0.97,0.24),(0.58,-0.82),(-0.88,-0.48),(0.08,-0.99)])
-
-
 
 
 background = pygame.image.load(background_image_filename).convert()
@@ -31,45 +22,68 @@ oertel = pygame.image.load(oertel_image_filename).convert_alpha()
 festerling = pygame.image.load(festerling_image_filename).convert_alpha()
 tonnenanwalt = pygame.image.load(tonnenanwalt_image_filename).convert_alpha()
 
+def get_heading(nextpoint, position_):
+    
+    #print(nextpoint[0])
+    #print(position_[0])
+    richtungsvektor = [0,0]
+    normalvektor = [0,0]
+    
+    richtungsvektor = [nextpoint[0] - position_[0],
+        nextpoint[1] - position_[1]]
+    
+    betrag = sqrt( richtungsvektor[0]**2 + richtungsvektor[1]**2 )
+
+    normalvektor = [(richtungsvektor[0] / betrag ),(richtungsvektor[1] / betrag)]
+
+    print("Richtungsvektor:")
+    print(richtungsvektor)
+    
+    print("NormalVektor:")
+    print(normalvektor)
+    return richtungsvektor 
+
+
+def step(state, speed):
+    old = start
+
+    start[0] += (heading[0] * speed)
+    start[1] += (heading[1] * speed)
+    return start
+
+
+def check_waypoint(counter_):
+    global counter, heading
+    a1 = round(waypoints[counter_][0], 2)
+    a2 = round(waypoints[counter_][1], 2)
+
+    b1 = round(start[0], 2)
+    b2 = round(start[1], 2)
+    if a1  == b1 and a2 == b2:
+        print("hi")
+        counter += 1
+        heading = get_heading(waypoints[counter], start)
+
+waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])
+time = 0
+start = [1,1] 
+old = []
+heading = get_heading(waypoints[0],start)
+counter = 0
+
 
 while True:
-	
-	for event in pygame.event.get():
-		if event.type == QUIT:
-			exit()
+    time += 0.01
+    for event in pygame.event.get():
+	    
+        if event.type == QUIT:
+            exit()
 			
-	screen.blit(background, (0.0,0.0))
-	screen.blit(lachmann, position)
-	screen.blit(oertel, (300,30))
-	screen.blit(festerling, (500,30))
-	screen.blit(tonnenanwalt,(800,30))
-	
-	time_passed = clock.tick()
-	time_passed_seconds = time_passed / 1000.0
-	
-	
-	
-	
+    screen.blit(background, (0.0,0.0))
+    screen.blit(lachmann, step(1,0.0005))
+    screen.blit(oertel, (300,30))
+    screen.blit(festerling, (500,30))
+    screen.blit(tonnenanwalt,(800,30))
 
-	route = time_passed_seconds * speed
-	position += heading[0] * route
-	
-	if route >= magnitude[0]:
-		route = 0
-		route1 = time_passed_seconds * speed
-		position += heading[1] * route1	
-		if route1 >= magnitude[1]:
-			route2 = time_passed_seconds * speed
-			position += heading[2] *route2
-			if route2 >= magnitude[2]:
-				route3 = time_passed_seconds * speed
-				position += heading[3] * route3
-				if route3 >= magnitude[3]:
-					route4 = time_passed_seconds * speed
-					position += heading[4] * route4
-		
-		
-		
-	
-	
-	pygame.display.update()
+    check_waypoint(counter)
+    pygame.display.update()
