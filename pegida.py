@@ -1,8 +1,8 @@
-background_image_filename = "Dresden_Karte1.png"
-lachmann_image_filename = "lachmann.png"
-oertel_image_filename = "oertel.png"
-festerling_image_filename = "festerling.png"
-tonnenanwalt_image_filename = "tonnenanwalt.png"
+background_image_filename = "Dresden_Map.svg"
+lachmann_image_filename = "lachmann.svg"
+oertel_image_filename = "oertel.svg"
+festerling_image_filename = "festerling.svb"
+tonnenanwalt_image_filename = "tonnenanwalt.svg"
 
 
 import pygame
