@@ -21,7 +21,7 @@ position = numpy.array((30.0,50.0))
 magnitude = [509., 141., 128., 409., 293., 330., 251., 532.]
 #heading = numpy.array([(0.7,0.73),(0.71,0.71),(0.78,0.63),(-0.52,0.65),(0.97,0.24),(0.58,-0.82),(-0.88,-0.48),(0.08,-0.99)])
 
-waypoints = numpy.array[(0,0), (640, 300)]
+waypoints = numpy.array([(0,0), (640, 300)])
 
 
 background = pygame.image.load(background_image_filename).convert()
@@ -35,20 +35,29 @@ route2 = 0
 route3 = 0
 route4 = 0
 time = 0
-start = (300,30)
+start = [300,30] 
 
-def get_heading(nextpoint):
-    position_ = lachman.get_pos()
-    print(position_)
-    richtungsvektor = waypoints[nextpoint] - position
+def get_heading(nextpoint, position_):
+    
+    print(nextpoint[0])
+    print(position_[0])
+    richtungsvektor = [(0,0),(0,0)]
+    richtungsvektor[0] = nextpoint[0] - position_[0]
+    richtungsvektor[1] = nextpoint[1] - position_[1]
     print(richtungsvektor)
     return richtungsvektor 
 
-def step():
+def step(state, speed):
+    global start
+    heading = get_heading(waypoints[state],start)
+    start[0] += (heading[0] * speed)
+    start[1] += (heading[1] * speed)
+    return start
 
-    return 0
+for x in range(0,10):
 
-start = (300,30)
+    print(step(0,0.1))
+"""
 while True:
     counter = 0
     time += 0.01
@@ -63,6 +72,5 @@ while True:
         screen.blit(festerling, (500,30))
         screen.blit(tonnenanwalt,(800,30))
     
-        route = time * speed
         position += heading[0] * route
-        pygame.display.update()
+        pygame.display.update()"""
