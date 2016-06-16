@@ -12,7 +12,7 @@ from sys import exit
 pygame.init()
 import numpy
 
-screen = pygame.display.set_mode((1024, 888), 0, 32)
+screen = pygame.display.set_mode((1920, 1080), 0, 32)
 pygame.display.set_caption("Scheiss Pegida")
 
 
