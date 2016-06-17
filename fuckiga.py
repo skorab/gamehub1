@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 background_image_filename = "Altstadt.png"
+=======
+background_image_filename = "Dresden_Map.png"
+>>>>>>> aaa2228f77fc12d55426627d772c8f519e628de2
 lachmann_image_filename = "lachmann.png"
 oertel_image_filename = "oertel.png"
 festerling_image_filename = "festerling.png"
