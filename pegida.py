@@ -9,12 +9,15 @@ import pygame
 from math import *
 from pygame.locals import *
 from sys import exit
-pygame.init()
 import numpy
+
 
 screen_size = (980, 735)
 
 screen = pygame.display.set_mode(screen_size, RESIZABLE, 32)
+
+pygame.init()
+
 pygame.display.set_caption("Scheiss Pegida")
 
 
@@ -23,6 +26,12 @@ lachmann = pygame.image.load(lachmann_image_filename).convert_alpha()
 oertel = pygame.image.load(oertel_image_filename).convert_alpha()
 festerling = pygame.image.load(festerling_image_filename).convert_alpha()
 tonnenanwalt = pygame.image.load(tonnenanwalt_image_filename).convert_alpha()
+
+waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])
+position = [1,1] 
+counter = 0
+speed = 0.0005
+
 
 def get_heading(nextpoint, position_):
     
@@ -47,35 +56,33 @@ def get_heading(nextpoint, position_):
 
 
 def step(state, speed):
-    old = start
+    """step() fuehrt einen einzelnen schritt in richtung des naechsten wegpunktes aus. 
+       Die Fkt. addiert das Heading * Geschwindigkeit auf die Aktuelle position. 
+       Folglich verschiebt sich die Position einen Schritt in richtung des naechsten Wegpunktes"""
 
-    start[0] += (heading[0] * speed)
-    start[1] += (heading[1] * speed)
-    return start
+    position[0] += (heading[0] * speed)
+    position[1] += (heading[1] * speed)
+    return position
+
 
 
 def check_waypoint(counter_):
     global counter, heading
-    a1 = round(waypoints[counter_][0], 2)
-    a2 = round(waypoints[counter_][1], 2)
 
-    b1 = round(start[0], 2)
-    b2 = round(start[1], 2)
-    if a1  == b1 and a2 == b2:
-        print("hi")
+
+    x1 = round(waypoints[counter_][0], 2)
+    y1 = round(waypoints[counter_][1], 2)
+    x2 = round(position[0], 2)
+    y2 = round(position[1], 2)
+    
+    if x1  == x2 and y1 == y2:
         counter += 1
-        heading = get_heading(waypoints[counter], start)
+        heading = get_heading(waypoints[counter], position)
 
-waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])
-time = 0
-start = [1,1] 
-old = []
-heading = get_heading(waypoints[0],start)
-counter = 0
+heading = get_heading(waypoints[0],position)
 
 
 while True:
-    time += 0.01
     for event in pygame.event.get():
 	    
         if event.type == QUIT:
@@ -90,7 +97,7 @@ while True:
         		screen.blit(background, (x,y))
 			
     screen.blit(background, (0.0,0.0))
-    screen.blit(lachmann, step(1,0.0005))
+    screen.blit(lachmann, step(1, speed))
     screen.blit(oertel, (300,30))
     screen.blit(festerling, (500,30))
     screen.blit(tonnenanwalt,(800,30))
