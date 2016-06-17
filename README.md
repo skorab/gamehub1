@@ -10,3 +10,6 @@ edited filenames in pegida.py
 
 __0.4__ 
 updated pegida.py & added burning bin animation
+
+__0.5__
+added waypoints in pegida.py, vector movement works now
