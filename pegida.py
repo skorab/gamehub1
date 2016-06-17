@@ -1,8 +1,8 @@
-background_image_filename = "Dresden_Map.svg"
-lachmann_image_filename = "lachmann.svg"
-oertel_image_filename = "oertel.svg"
-festerling_image_filename = "festerling.svb"
-tonnenanwalt_image_filename = "tonnenanwalt.svg"
+background_image_filename = "Altstadt.png"
+lachmann_image_filename = "lachmann.png"
+oertel_image_filename = "oertel.png"
+festerling_image_filename = "festerling.png"
+tonnenanwalt_image_filename = "tonnenanwalt.png"
 
 
 import pygame
@@ -12,7 +12,7 @@ from sys import exit
 pygame.init()
 import numpy
 
-screen = pygame.display.set_mode((1024, 888), 0, 32)
+screen = pygame.display.set_mode((1920, 1080), 0, 32)
 pygame.display.set_caption("Scheiss Pegida")
 
 
