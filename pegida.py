@@ -1,8 +1,4 @@
-<<<<<<< 52cbc0d3446531098e8c5734ff378b7c0a7c2b69
 background_image_filename = "Altstadt.png"
-=======
-background_image_filename = "Dresden_Karte1.png"
->>>>>>> kommentare hinzugefügt
 lachmann_image_filename = "lachmann.png"
 oertel_image_filename = "oertel.png"
 festerling_image_filename = "festerling.png"
