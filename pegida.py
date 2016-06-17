@@ -1,8 +1,8 @@
-background_image_filename = "Altstadt.png"
-lachmann_image_filename = "lachmann.png"
-oertel_image_filename = "oertel.png"
-festerling_image_filename = "festerling.png"
-tonnenanwalt_image_filename = "tonnenanwalt.png"
+background_image_filename = "./pictures/Altstadt.png"
+lachmann_image_filename = "./pictures/lachmann.png"
+oertel_image_filename = "./pictures/oertel.png"
+festerling_image_filename = "./pictures/festerling.png"
+tonnenanwalt_image_filename = "./pictures/tonnenanwalt.png"
 
 
 import pygame
@@ -13,13 +13,9 @@ import numpy
 
 
 screen_size = (980, 735)
-
 screen = pygame.display.set_mode(screen_size, RESIZABLE, 32)
-
 pygame.init()
-
 pygame.display.set_caption("Scheiss Pegida")
-
 
 background = pygame.image.load(background_image_filename).convert()
 lachmann = pygame.image.load(lachmann_image_filename).convert_alpha()
@@ -31,7 +27,6 @@ waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])
 position = [1,1] 
 counter = 0
 speed = 0.0005
-
 
 def get_heading(nextpoint, position_):
     
@@ -49,9 +44,9 @@ def get_heading(nextpoint, position_):
 
     print("Richtungsvektor:")
     print(richtungsvektor)
-    
     print("NormalVektor:")
     print(normalvektor)
+    
     return richtungsvektor 
 
 
