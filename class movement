@@ -1,0 +1,64 @@
+class Pegidioten(object):
+	
+	def __init__(self, richtungsvektor, betrag, normalvektor, heading, x1, x2, y1, y2):
+		self.heading = heading
+		self.richtungsvektor = richtungsvektor
+		self.betrag = betrag
+		self.normalvektor = normalvektor
+		self.x1 = x1
+		self.x2 = x2
+		self.y1 = y1
+		self.y2 = y2
+		self.position = [1,1]
+		self.speed = 0.00005
+		self.counter = 0
+		self.waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])	#viellei hier numpy modul importieren?
+	
+			
+		
+	def get_heading(self, nextpoint, new_position):
+       
+		self.richtungsvektor = [nextpoint[0] - new_position[0], nextpoint[1] - new_position[1]]
+    
+		self.betrag = sqrt(self.richtungsvektor[0]**2 + self.richtungsvektor[1]**2 )
+
+		self.normalvektor = [(self.richtungsvektor[0] / self.betrag ),(self.richtungsvektor[1] / self.betrag)]
+    
+		return self.richtungsvektor
+
+		
+		
+
+	def step(self):
+			"""step() fuehrt einen einzelnen schritt in richtung des naechsten wegpunktes aus. 
+			Die Fkt. addiert das Heading * Geschwindigkeit auf die Aktuelle position. 
+			Folglich verschiebt sich die Position einen Schritt in richtung des naechsten Wegpunktes"""
+
+			self.position[0] += (heading[0] * self.speed)
+			self.position[1] += (heading[1] * self.speed)
+			
+			return position
+
+
+			
+			
+
+	def check_waypoint(self, next_counter):
+
+
+			self.x1 = round(self.waypoints[next_counter][0], 2)	#nicht sicher ob hier auch x1,x2,y1,y2 zu self gehören
+			self.y1 = round(self.waypoints[next_counter][1], 2)
+			self.x2 = round(self.position[0], 2)
+			self.y2 = round(self.position[1], 2)
+    
+			if self.x1  == self.x2 and self.y1 == self.y2:
+				self.counter += 1
+				self.heading = get_heading(waypoints[self.counter], self.position)
+
+			
+
+		
+		
+		
+		
+		
