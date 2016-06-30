@@ -10,7 +10,7 @@ from math import *
 from pygame.locals import *
 from sys import exit
 import numpy
-
+import class_movement 
 
 screen_size = (980, 735)
 screen = pygame.display.set_mode(screen_size, RESIZABLE, 32)
@@ -32,8 +32,7 @@ def get_heading(nextpoint, position_):
     
     #print(nextpoint[0])
     #print(position_[0])
-    richtungsvektor = [0,0]
-    normalvektor = [0,0]
+    
     
     richtungsvektor = [nextpoint[0] - position_[0],
         nextpoint[1] - position_[1]]
@@ -50,7 +49,7 @@ def get_heading(nextpoint, position_):
     return richtungsvektor 
 
 
-def step(state, speed):
+def step(speed):
     """step() fuehrt einen einzelnen schritt in richtung des naechsten wegpunktes aus. 
        Die Fkt. addiert das Heading * Geschwindigkeit auf die Aktuelle position. 
        Folglich verschiebt sich die Position einen Schritt in richtung des naechsten Wegpunktes"""
@@ -92,7 +91,7 @@ while True:
         		screen.blit(background, (x,y))
 			
     screen.blit(background, (0.0,0.0))
-    screen.blit(lachmann, step(1, speed))
+    screen.blit(lachmann, step(speed))
     screen.blit(oertel, (300,30))
     screen.blit(festerling, (500,30))
     screen.blit(tonnenanwalt,(800,30))
