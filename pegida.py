@@ -10,7 +10,7 @@ from math import *
 from pygame.locals import *
 from sys import exit
 import numpy
-import class_movement 
+
 
 screen_size = (980, 735)
 screen = pygame.display.set_mode(screen_size, RESIZABLE, 32)

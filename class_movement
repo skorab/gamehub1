@@ -1,30 +1,24 @@
 class movement(object):
 	
-	def __init__(self, richtungsvektor, betrag, normalvektor, heading, x1, x2, y1, y2):
-		self.heading = heading
-		self.richtungsvektor = richtungsvektor
-		self.betrag = betrag
-		self.normalvektor = normalvektor
-		self.x1 = x1
-		self.x2 = x2
-		self.y1 = y1
-		self.y2 = y2
+	def __init__(self):
+		
+		
 		self.position = [1,1]
 		self.speed = 0.00005
 		self.counter = 0
-		self.waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])	#viellei hier numpy modul importieren?
+		self.waypoints = numpy.array([(100,0), (1,1), (100,50), (50,250)])	
 	
 			
 		
-	def get_heading(self, nextpoint, new_position):
+	def get_heading(self):
        
-		self.richtungsvektor = [nextpoint[0] - new_position[0], nextpoint[1] - new_position[1]]
+		richtungsvektor = [self.waypoints[0] - self.position[0], self.waypoints[1] -self.position[1]]
     
-		self.betrag = sqrt(self.richtungsvektor[0]**2 + self.richtungsvektor[1]**2 )
-
-		self.normalvektor = [(self.richtungsvektor[0] / self.betrag ),(self.richtungsvektor[1] / self.betrag)]
+		betrag = sqrt(richtungsvektor[0]**2 + richtungsvektor[1]**2 )
+		
+		normalvektor = [(richtungsvektor[0] / betrag ),(richtungsvektor[1] / betrag)]
     
-		return self.richtungsvektor
+		return richtungsvektor
 
 		
 		
@@ -43,17 +37,17 @@ class movement(object):
 			
 			
 
-	def check_waypoint(self, next_counter):
+	def check_waypoint(self):
 
 
-			self.x1 = round(self.waypoints[next_counter][0], 2)	#nicht sicher ob hier auch x1,x2,y1,y2 zu self gehören
-			self.y1 = round(self.waypoints[next_counter][1], 2)
-			self.x2 = round(self.position[0], 2)
-			self.y2 = round(self.position[1], 2)
+			x1 = round(self.waypoints[self.counter][0], 2)	
+			y1 = round(self.waypoints[next_counter][1], 2)
+			x2 = round(self.position[0], 2)
+			y2 = round(self.position[1], 2)
     
-			if self.x1  == self.x2 and self.y1 == self.y2:
+			if x1  == x2 and y1 == y2:
 				self.counter += 1
-				self.heading = get_heading(waypoints[self.counter], self.position)
+				heading = get_heading(waypoints[self.counter], self.position)
 
 			
 
